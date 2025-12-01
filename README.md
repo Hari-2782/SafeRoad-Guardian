@@ -85,7 +85,7 @@ SafeRoad-Guardian is an intelligent road safety system that detects road hazards
 ## 🏗️ Architecture
 
 ![Architecture Diagram](<img width="2816" height="1536" alt="Gemini_Generated_Image_xrnnw2xrnnw2xrnn" src="https://github.com/user-attachments/assets/ee358b8c-6dc1-479d-a9a8-80597c584e1e" />)
-<img width="2816" height="1536" alt="Gemini_Generated_Image_xrnnw2xrnnw2xrnn" src="https://github.com/user-attachments/assets/ee358b8c-6dc1-479d-a9a8-80597c584e1e" />
+ <img width="2816" height="1536" alt="Gemini_Generated_Image_xrnnw2xrnnw2xrnn" src="https://github.com/user-attachments/assets/ee358b8c-6dc1-479d-a9a8-80597c584e1e" /> 
 
 ### System Flow
 
