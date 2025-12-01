@@ -90,16 +90,17 @@ def create_graph():
     return graph.compile()
 
 
-def run_analysis(image_path: str, gps: str = "6.9271,79.8612"):
+def run_analysis(image_path: str, gps: str = "6.9271,79.8612", for_web: bool = False):
     """
     Run the complete road safety analysis pipeline.
     
     Args:
         image_path: Path to the image to analyze
         gps: GPS coordinates (default: Colombo, Sri Lanka)
+        for_web: If True, return audio paths instead of playing audio
         
     Returns:
-        Final state with analysis results
+        Final state with analysis results (includes audio_path if for_web=True)
     """
     # Create the graph
     app = create_graph()
@@ -122,6 +123,60 @@ def run_analysis(image_path: str, gps: str = "6.9271,79.8612"):
     print(f"{'='*60}\n")
     
     result = app.invoke(initial_state)
+    
+    # Add audio generation for web interface
+    if for_web:
+        from tools.professional_voice import speak_professional
+        
+        hazards = result.get("hazards", "")
+        signs = result.get("signs", "")
+        should_report = result.get("should_report", True)
+        
+        # Generate audio for hazards
+        if hazards and "None" not in hazards and should_report:
+            severity = result.get("severity", "HIGH")
+            alert_text, audio_path = speak_professional(
+                "Road hazard detected", 
+                severity.lower(), 
+                play_audio=False, 
+                return_audio_path=True
+            )
+            result["voice_alert"] = alert_text
+            result["audio_path"] = audio_path
+        
+        # Generate audio for road signs
+        elif signs and "None" not in signs:
+            sign_type = signs.lower()
+            if "hospital" in sign_type:
+                alert_text, audio_path = speak_professional(
+                    "Hospital crossing ahead. Reduce speed and no horn zone", 
+                    "low", 
+                    play_audio=False, 
+                    return_audio_path=True
+                )
+            elif "school" in sign_type:
+                alert_text, audio_path = speak_professional(
+                    "School zone ahead. Reduce speed and watch for children", 
+                    "normal", 
+                    play_audio=False, 
+                    return_audio_path=True
+                )
+            elif "crossing" in sign_type or "pedestrian" in sign_type:
+                alert_text, audio_path = speak_professional(
+                    "Pedestrian crossing ahead. Reduce speed and stay alert", 
+                    "normal", 
+                    play_audio=False, 
+                    return_audio_path=True
+                )
+            else:
+                alert_text, audio_path = speak_professional(
+                    "Road sign detected. Stay alert", 
+                    "low", 
+                    play_audio=False, 
+                    return_audio_path=True
+                )
+            result["voice_alert"] = alert_text
+            result["audio_path"] = audio_path
     
     return result
 
