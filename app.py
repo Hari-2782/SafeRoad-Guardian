@@ -46,6 +46,7 @@ st.markdown("""
 # Header
 st.markdown('<h1 class="main-header">🛣️ SafeRoad-Guardian</h1>', unsafe_allow_html=True)
 st.markdown('<p class="sub-header">AI-Powered Road Safety Monitoring with Voice Alerts & Authority Reporting</p>', unsafe_allow_html=True)
+st.caption("🌐 Live demo running on Streamlit Cloud – try uploading your own road photo or use sample images below!")
 
 # Sidebar
 with st.sidebar:

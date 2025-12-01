@@ -3,10 +3,19 @@ Vision Tools for SafeRoad-Guardian
 Two custom tools for detecting road hazards and assessing road signs
 """
 
+import os
+# Force CPU mode and headless OpenCV for cloud deployment
+os.environ["CUDA_VISIBLE_DEVICES"] = ""  # Force CPU, avoid GPU driver issues
+os.environ["OPENCV_IO_MAX_IMAGE_PIXELS"] = str(pow(2, 40))  # Prevent huge image crash
+os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"  # Headless mode
+
 from ultralytics import YOLO
 from typing import Dict, List
 import cv2
 import numpy as np
+
+# Silence OpenCV warnings
+cv2.setLogLevel(3)
 
 # Load YOLO models
 pothole_model = YOLO("models/pothole_model.pt")        # your first model
