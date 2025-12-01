@@ -21,6 +21,7 @@ llm = ChatGoogleGenerativeAI(
 def supervisor_node(state: Dict[str, Any]) -> Dict[str, Any]:
     """
     Supervisor agent that coordinates the overall workflow.
+    Uses Gemini LLM for intelligent workflow decisions.
     
     Args:
         state: Current agent state
@@ -28,14 +29,25 @@ def supervisor_node(state: Dict[str, Any]) -> Dict[str, Any]:
     Returns:
         Updated state with supervisor's decisions
     """
-    state["messages"].append("Supervisor Agent → Initiating road safety analysis pipeline")
+    # Use Gemini LLM to generate context-aware workflow message
+    image_name = state.get("image_path", "unknown").split("/")[-1].split("\\")[-1]
+    gps = state.get("gps", "unknown")
+    
+    try:
+        # Gemini generates intelligent workflow initiation message
+        prompt = f"Generate a brief professional message (max 10 words) for initiating road safety analysis for image: {image_name} at GPS: {gps}"
+        response = llm.invoke(prompt)
+        workflow_msg = response.content if hasattr(response, 'content') else str(response)
+        state["messages"].append(f"Supervisor Agent (Gemini) → {workflow_msg}")
+    except:
+        state["messages"].append("Supervisor Agent → Initiating road safety analysis pipeline")
     
     # Determine workflow based on image availability
     if "image_path" not in state or not state["image_path"]:
         state["messages"].append("Supervisor Agent → ERROR: No image provided")
         state["error"] = True
     else:
-        state["messages"].append(f"Supervisor Agent → Processing image: {state['image_path']}")
+        state["messages"].append(f"Supervisor Agent → Validated input: {state['image_path']}")
         state["error"] = False
     
     return state

@@ -160,14 +160,14 @@ if __name__ == "__main__":
             from tools.professional_voice import speak_professional
             from tools.authority_reporter import send_to_authority
             
-            # Determine severity
-            severity = "HIGH" if "pothole" in hazards.lower() else "LOW"
+            # Get Gemini-assessed severity (or default to HIGH)
+            severity = result.get("severity", "HIGH")
             hazard_desc = "Road hazard detected"
             
             # Play voice alert
             speak_professional(hazard_desc, severity.lower(), play_audio=True)
             
-            # Generate authority report
+            # Generate authority report with Gemini-assessed severity
             authority_report = send_to_authority(
                 image_path=image_path,
                 gps=gps,

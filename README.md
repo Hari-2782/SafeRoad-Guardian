@@ -56,8 +56,9 @@ SafeRoad-Guardian is an intelligent road safety system that detects road hazards
 
 ### 🚀 Killer Features (Competition-Winning)
 
-1. **🔊 Professional Voice Alerts**
-   - Gemini AI-powered natural language generation
+1. **🔊 Professional Voice Alerts (Gemini-Powered)**
+   - **Gemini AI generates natural emergency-style voice alerts**
+   - Converts technical detections into human-friendly warnings
    - Emergency-style warnings like premium cars
    - Plays actual audio through speakers
    - Severity-aware: "Caution" → "Danger" → "Critical Danger"
@@ -66,11 +67,14 @@ SafeRoad-Guardian is an intelligent road safety system that detects road hazards
    - WhatsApp/Email ready format (copy-paste to send)
    - Base64-encoded photos attached
    - Google Maps links for navigation
+   - **Gemini-assessed severity levels** (HIGH/MEDIUM/LOW)
    - Multi-country authority contact info
 
-3. **🤖 Multi-Agent AI (LangGraph)**
-   - 4 coordinated agents work like a professional team
-   - Supervisor → Vision → Prioritization → Report
+3. **🤖 Multi-Agent AI (LangGraph + Gemini)**
+   - **3 out of 4 agents powered by Gemini LLM**
+   - **Supervisor**: Gemini generates intelligent workflow messages
+   - **Prioritization**: Gemini assesses hazard severity
+   - **Voice**: Gemini creates natural language alerts
    - Intelligent routing based on detection results
 
 4. **💾 Smart Memory (ChromaDB)**
