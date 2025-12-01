@@ -1,0 +1,13 @@
+google-generativeai
+langgraph
+langchain-google-genai
+ultralytics
+opencv-python
+chromadb
+fastapi
+uvicorn
+python-dotenv
+numpy
+Pillow
+requests
+pygame
