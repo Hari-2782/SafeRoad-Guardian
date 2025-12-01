@@ -15,9 +15,9 @@ SafeRoad-Guardian is an intelligent road safety system that detects road hazards
 
 ## 🎥 Demo
 
-**Video Demo:** [Watch on YouTube](YOUR_YOUTUBE_LINK_HERE)
+**Video Demo:** [Watch on YouTube](https://youtu.be/OxzxOec5NaY)
 
-**Live Demo:** Coming soon
+**Live Demo:** [Try it now!](https://saferoad-guardian.streamlit.app/)
 
 ## 📋 Table of Contents
 
